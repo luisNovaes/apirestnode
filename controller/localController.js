@@ -10,6 +10,7 @@ exports.cadastrar = (req, res) => {
   console.log(req.userId);
   
   Local.create({
+    localNome: req.body.localNome,
     city: req.body.city,
     regiao: req.body.regiao,
     country: req.body.country,
@@ -37,6 +38,9 @@ exports.cadastrar = (req, res) => {
   });
 }
 
+
+
+
 exports.listarcadastros = function(req, res, next) {
       
     Local.findAll({}, function(err, locais) {
@@ -44,7 +48,7 @@ exports.listarcadastros = function(req, res, next) {
     }).then(local => {
         res.status(200).json({
           "description": "Lista de todos os locais cadastrados.",
-          "local": local
+          "local": local.sort()
         });
       }).catch(err => {
         res.status(500).json({

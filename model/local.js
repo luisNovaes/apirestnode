@@ -1,5 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const Local = sequelize.define('locais', {
+      localNome: {
+        type: Sequelize.STRING
+      },
       city: {
         type: Sequelize.STRING
       },

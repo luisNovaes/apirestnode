@@ -10,6 +10,6 @@ var express = require('express');
  
   app.post('/api/local/cadastrar', [authJwt.verifyToken, verifyCadastro.checkAvaliacao, authJwt.isPmOrAdmin], localController.cadastrar);
   
-  app.get('/api/local/listar-todos', localController.listarcadastros);
+  app.get('/api/local/listar-todos', [authJwt.verifyToken, authJwt.isPmOrAdmin],localController.listarcadastros);
   app.get('/api/local/listar-por-usuario', localController.listarporuser);
 } 
