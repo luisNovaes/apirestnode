@@ -1,5 +1,5 @@
 const env = {
-    database: 'desafio-backend',
+    database: 'base',
     username: 'postgres',
     password: 'root',
     host: 'localhost',
