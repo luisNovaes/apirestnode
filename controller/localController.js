@@ -1,5 +1,6 @@
 var express = require('express');
 const db = require('../config/db.config.js');
+const ValorAvaliacao = db.valorAvaliacao;
 const Avaliacao = db.avaliacao;
 const Local = db.local;
 const Op = db.Sequelize.Op;
@@ -16,26 +17,13 @@ exports.cadastrar = (req, res) => {
     country: req.body.country,
     lat: req.body.lat,
     lon: req.body.lon,
-    organization: req.body.organization,
     comentario: req.body.comentario,
     userId: req.userId
-  }).then(local => {
-    Avaliacao.findAll({
-      where: {
-      avaliacao: {
-        [Op.or]: req.body.avaliacao
-      }
-      }
-    }).then(avaliacoes => {
-        local.setAvaliacoes(avaliacoes).then(() => {
+  }).then(() => {
         res.send("Local registrado com sucesso!");
-            });
     }).catch(err => {
-      res.status(500).send("Error -> " + err);
+        res.status(500).send("Error -> " + err);
     });
-  }).catch(err => {
-    res.status(500).send("Fail! Error -> " + err);
-  });
 }
 
 
@@ -56,6 +44,35 @@ exports.listarcadastros = function(req, res, next) {
           "error": err
         });
       })
+}
+
+
+exports.avaliarlocal = (req, res) => {
+  // Save User to Database
+  console.log("Processing func -> cadastrar local");
+  console.log(req.userId);
+  
+  Avaliacao.create({
+    userId: req.body.userId,
+    localId: req.body.localId,
+    comentario: req.body.comentario,
+  }).then(avaliacao => {
+    ValorAvaliacao.findAll({
+      where: {
+      valorAvaliacao: {
+        [Op.or]: req.body.avaliacao
+      }
+      }
+    }).then(valoresAvaliacao => {
+        avaliacao.setValoresAvaliacaos(valoresAvaliacao).then(() => {
+        res.send("Local registrado com sucesso!");
+            });
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
+    });
+  }).catch(err => {
+    res.status(500).send("Fail! Error -> " + err);
+  });
 }
 
 exports.listarporuser = function(req, res, next) {

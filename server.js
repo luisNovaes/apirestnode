@@ -9,13 +9,13 @@ require('./routes/local.js')(app);
 const db = require('./config/db.config.js');
  
 const Role = db.role;
-const Avaliacao = db.avaliacao;
+const ValorAvaliacao = db.valorAvaliacao;
   
 // force: true will drop the table if it already exists
-db.sequelize.sync({force: false}).then(() => {
+db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync with { force: true }');
-  //initial();
-  //avaliacao();
+  initial();
+  avaliacao();
 });
  
 //require('./app/route/project.route.js')(app);
@@ -48,28 +48,28 @@ function initial(){
 }
 
 function avaliacao(){
-  Avaliacao.create({
+  ValorAvaliacao.create({
     id: 1,
-    avaliacao: "1"
+    valorAvaliacao: "1"
   });
   
-  Avaliacao.create({
+  ValorAvaliacao.create({
     id: 2,
-    avaliacao: "2"
+    valorAvaliacao: "2"
   });
   
-  Avaliacao.create({
+  ValorAvaliacao.create({
     id: 3,
-    avaliacao: "3"
+    valorAvaliacao: "3"
   });
   
-  Avaliacao.create({
+  ValorAvaliacao.create({
     id: 4,
-    avaliacao: "4"
+    valorAvaliacao: "4"
   });
   
-  Avaliacao.create({
+  ValorAvaliacao.create({
     id: 5,
-    avaliacao: "5"
+    valorAvaliacao: "5"
   }); 
 }

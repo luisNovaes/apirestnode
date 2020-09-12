@@ -1,12 +1,16 @@
 module.exports = (sequelize, Sequelize) => {
     const Avaliacao = sequelize.define('avaliacoes', {
-      id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true
+      
+      userId: {
+        type: Sequelize.STRING
       },
-      avaliacao: {
+      localId: {
+        type: Sequelize.STRING
+      },
+      comentarios: {
         type: Sequelize.STRING
       }
+      
     });
     
     return Avaliacao;
