@@ -1,9 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const Local = sequelize.define('locais', {
       
-      localNome: {
-        type: Sequelize.STRING
-      },
       city: {
         type: Sequelize.STRING
       },
@@ -19,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
       lon: {
         type: Sequelize.STRING
       },
-      comentario: {
+      nomelocal: {
         type: Sequelize.STRING
       },
       userId: {
