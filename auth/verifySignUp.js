@@ -6,7 +6,6 @@ const Role = db.role;
  
 checkDuplicateUserNameOrEmail = (req, res, next) => {
  
-    // -> Check Email is already in use
     User.findOne({ 
       where: {
         email: req.body.email

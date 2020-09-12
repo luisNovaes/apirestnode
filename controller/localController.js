@@ -26,9 +26,9 @@ exports.cadastrar = (req, res) => {
     });
 }
 
-exports.listarcadastros = function(req, res, next) {
+exports.listarcadastros = (req, res, next) => {
       
-    Local.findAll({}, function(err, locais) {
+    Local.findAll({}, (err, locais) => {
 
     }).then(local => {
         res.status(200).json({
@@ -71,9 +71,9 @@ exports.avaliarlocal = (req, res) => {
   });
 }
 
-exports.listaravaliacoes = function(rec, res){
+exports.listaravaliacoes = (rec, res) =>{
 
-  Avaliacao.findAll({}, function(err, avaliacoes) {
+  Avaliacao.findAll({}, (err, avaliacoes) => {
 
   }).then(avaliacao => {
       res.status(200).json({
@@ -90,9 +90,10 @@ exports.listaravaliacoes = function(rec, res){
 }
 
 
-exports.listarporuser = function(req, res, next) {
+exports.listarporuser = (req, res, next) => {
+  
     console.log(req.userId);
-    Local.findByPk("1", function(err, locais) {
+    Local.findByPk("1", (err, locais)  =>{
        
     }).then(local => {
         res.status(200).json({
