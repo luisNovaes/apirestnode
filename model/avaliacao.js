@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       localId: {
         type: Sequelize.STRING
       },
-      comentarios: {
+      comentario: {
         type: Sequelize.STRING
       }
       

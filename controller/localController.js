@@ -6,7 +6,7 @@ const Local = db.local;
 const Op = db.Sequelize.Op;
 
 exports.cadastrar = (req, res) => {
-  // Save User to Database
+
   console.log("Processing func -> cadastrar local");
   console.log(req.userId);
   
@@ -26,9 +26,6 @@ exports.cadastrar = (req, res) => {
     });
 }
 
-
-
-
 exports.listarcadastros = function(req, res, next) {
       
     Local.findAll({}, function(err, locais) {
@@ -46,14 +43,13 @@ exports.listarcadastros = function(req, res, next) {
       })
 }
 
-
 exports.avaliarlocal = (req, res) => {
-  // Save User to Database
+  
   console.log("Processing func -> cadastrar local");
   console.log(req.userId);
   
   Avaliacao.create({
-    userId: req.body.userId,
+    userId: req.userId,
     localId: req.body.localId,
     comentario: req.body.comentario,
   }).then(avaliacao => {
@@ -65,7 +61,7 @@ exports.avaliarlocal = (req, res) => {
       }
     }).then(valoresAvaliacao => {
         avaliacao.setValoresAvaliacaos(valoresAvaliacao).then(() => {
-        res.send("Local registrado com sucesso!");
+        res.send("Avaliação do local registrado com sucesso!");
             });
     }).catch(err => {
       res.status(500).send("Error -> " + err);
@@ -74,6 +70,25 @@ exports.avaliarlocal = (req, res) => {
     res.status(500).send("Fail! Error -> " + err);
   });
 }
+
+exports.listaravaliacoes = function(rec, res){
+
+  Avaliacao.findAll({}, function(err, avaliacoes) {
+
+  }).then(avaliacao => {
+      res.status(200).json({
+        "description": "Lista de todos os locais cadastrados.",
+        "local": avaliacao.sort()
+      });
+    }).catch(err => {
+      res.status(500).json({
+        "description": "Tente novamente mais tarde.",
+        "error": err
+      });
+    })
+
+}
+
 
 exports.listarporuser = function(req, res, next) {
     console.log(req.userId);
