@@ -5,42 +5,24 @@ const Avaliacao = db.avaliacao;
 const Local = db.local;
 const Op = db.Sequelize.Op;
 
-exports.cadastrar = (req, res) => {
+exports.cadastrarlocal = (req, res) => {
 
   console.log("Processing func -> cadastrar local");
   console.log(req.userId);
   
   Local.create({
-    localNome: req.body.localNome,
     city: req.body.city,
     regiao: req.body.regiao,
     country: req.body.country,
     lat: req.body.lat,
     lon: req.body.lon,
-    comentario: req.body.comentario,
+    nomelocal: req.body.nomelocal,
     userId: req.userId
   }).then(() => {
         res.send("Local registrado com sucesso!");
     }).catch(err => {
         res.status(500).send("Error -> " + err);
     });
-}
-
-exports.listarcadastros = (req, res, next) => {
-      
-    Local.findAll({}, (err, locais) => {
-
-    }).then(local => {
-        res.status(200).json({
-          "description": "Lista de todos os locais cadastrados.",
-          "local": local.sort()
-        });
-      }).catch(err => {
-        res.status(500).json({
-          "description": "Tente novamente mais tarde.",
-          "error": err
-        });
-      })
 }
 
 exports.avaliarlocal = (req, res) => {
@@ -71,8 +53,27 @@ exports.avaliarlocal = (req, res) => {
   });
 }
 
-exports.listaravaliacoes = (rec, res) =>{
 
+
+exports.listartodoslocais = (req, res, next) => {
+  console.log(req.userId);
+    Local.findAll({}, (err, locais) => {
+
+    }).then(local => {
+        res.status(200).json({
+          "description": "Lista de todos os locais cadastrados.",
+          "local": local.sort()
+        });
+      }).catch(err => {
+        res.status(500).json({
+          "description": "Tente novamente mais tarde.",
+          "error": err
+        });
+      })
+}
+
+exports.listartodasavaliacoes = (req, res) =>{
+  console.log(req.userId);
   Avaliacao.findAll({}, (err, avaliacoes) => {
 
   }).then(avaliacao => {
@@ -90,13 +91,22 @@ exports.listaravaliacoes = (rec, res) =>{
 }
 
 
-exports.listarporuser = (req, res, next) => {
+exports.listarlocal = (rec, res) =>{
+
+
+}
+
+exports.listaravaliacoeslocal = (rec, res) =>{
   
+}
+
+
+exports.listarporuser = (req, res, next) => {
     console.log(req.userId);
-    Local.findByPk("1", (err, locais)  =>{
+    Local.findByPk(req.params.userId, (err, locais)  =>{
        
     }).then(local => {
-        res.status(200).json({
+        res.status(200).json({ 
           "description": "Locais cadastrdos por usuários.",
           "local": local,
           
