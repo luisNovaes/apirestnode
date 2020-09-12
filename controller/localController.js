@@ -43,7 +43,7 @@ exports.avaliarlocal = (req, res) => {
       }
     }).then(valoresAvaliacao => {
         avaliacao.setValoresAvaliacaos(valoresAvaliacao).then(() => {
-        res.send("Avaliação do local registrado com sucesso!");
+        res.send("Local avaliado com sucesso!");
             });
     }).catch(err => {
       res.status(500).send("Error -> " + err);
@@ -54,15 +54,17 @@ exports.avaliarlocal = (req, res) => {
 }
 
 
-
 exports.listartodoslocais = (req, res, next) => {
   console.log(req.userId);
-    Local.findAll({}, (err, locais) => {
-
+      Local.findAll({  
+        order: [
+          ['nomelocal', 'ASC'],
+        ]
     }).then(local => {
-        res.status(200).json({
-          "description": "Lista de todos os locais cadastrados.",
-          "local": local.sort()
+        res.status(200).json({ 
+          "description": "Lista de todos os locais em ordem alfabética.",
+          "local": local,
+          
         });
       }).catch(err => {
         res.status(500).json({
@@ -78,7 +80,7 @@ exports.listartodasavaliacoes = (req, res) =>{
 
   }).then(avaliacao => {
       res.status(200).json({
-        "description": "Lista de todos os locais cadastrados.",
+        "description": "Lista de todas as avaliações.",
         "local": avaliacao.sort()
       });
     }).catch(err => {
@@ -91,23 +93,59 @@ exports.listartodasavaliacoes = (req, res) =>{
 }
 
 
-exports.listarlocal = (rec, res) =>{
-
-
+exports.listarlocal= (req, res) =>{
+  console.log(req.userId);
+      Local.findAll({
+        where: {
+          id: req.params.id
+        }   
+    }).then(local => {
+        res.status(200).json({ 
+          "description": "Local especifico.",
+          "local": local
+        });
+      }).catch(err => {
+        res.status(500).json({
+          "description": "Tente novamente mais tarde.",
+          "error": err
+        });
+      })
 }
 
-exports.listaravaliacoeslocal = (rec, res) =>{
+exports.listaravaliacoeslocal = (req, res) =>{
+
+  console.log(req.userId);
+      Local.findAll({
+        where: {
+          id: req.params.id
+        }   
+    }).then(local => {
+        res.status(200).json({ 
+          "description": "Lista de avaliações de locais.",
+          "local": local
+        });
+      }).catch(err => {
+        res.status(500).json({
+          "description": "Tente novamente mais tarde.",
+          "error": err
+        });
+      })
   
 }
 
 
-exports.listarporuser = (req, res, next) => {
+exports.listarlocalporuser = (req, res, next) => {
     console.log(req.userId);
-    Local.findByPk(req.params.userId, (err, locais)  =>{
-       
+      Local.findAll({
+        where: {
+          userId: req.params.userId
+        },  
+        order: [
+          ['nomelocal', 'ASC'],
+        ]
     }).then(local => {
         res.status(200).json({ 
-          "description": "Locais cadastrdos por usuários.",
+          "description": "Locais locais por usuários.",
           "local": local,
           
         });
@@ -117,6 +155,5 @@ exports.listarporuser = (req, res, next) => {
           "error": err
         });
       })
-
 }
 

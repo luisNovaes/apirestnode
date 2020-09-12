@@ -12,9 +12,9 @@ var express = require('express');
   app.get('/api/local/listar-todos-locais', [authJwt.verifyToken, authJwt.isPmOrAdmin],localController.listartodoslocais);
   app.get('/api/local/listar-todas-avaliacoes', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listartodasavaliacoes);
 
-  app.get('/api/local/listar-local', localController.listarlocal);
-  app.get('/api/local/listar-avaliacoes-local', localController.listaravaliacoeslocal);
+  app.get('/api/local/listar-local-especifico/:id', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listarlocal);
+  app.get('/api/local/listar-avaliacoes-local', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listaravaliacoeslocal);
 
-  app.get('/api/local/listar-por-usuario/:userId', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listarporuser);
+  app.get('/api/local/listar-local-por-usuario/:userId', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listarlocalporuser);
 
 } 
