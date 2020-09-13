@@ -32,7 +32,7 @@ exports.avaliarlocal = (req, res) => {
   
   Avaliacao.create({
     userId: req.userId,
-    localId: req.body.localId,
+    localId: req.params.localId,
     comentario: req.body.comentario,
   }).then(avaliacao => {
     ValorAvaliacao.findAll({
@@ -76,7 +76,11 @@ exports.listartodoslocais = (req, res, next) => {
 
 exports.listartodasavaliacoes = (req, res) =>{
   console.log(req.userId);
-  Avaliacao.findAll({}, (err, avaliacoes) => {
+  Avaliacao.findAll({
+    include: [{
+      model: ValorAvaliacao 
+    }]
+  }, (err, avaliacoes) => {
 
   }).then(avaliacao => {
       res.status(200).json({
@@ -115,14 +119,17 @@ exports.listarlocal= (req, res) =>{
 exports.listaravaliacoeslocal = (req, res) =>{
 
   console.log(req.userId);
-      Local.findAll({
+      Avaliacao.findAll({
         where: {
-          id: req.params.id
-        }   
-    }).then(local => {
+          localId: req.params.id
+        },
+        include: [{
+      model: ValorAvaliacao 
+    }]   
+    }).then(avaliacao => {
         res.status(200).json({ 
           "description": "Lista de avaliações de locais.",
-          "local": local
+          "local": avaliacao
         });
       }).catch(err => {
         res.status(500).json({
@@ -155,5 +162,11 @@ exports.listarlocalporuser = (req, res, next) => {
           "error": err
         });
       })
+}
+
+
+exports.criaravaliacaolocais = (req, res, next) => {
+
+
 }
 
