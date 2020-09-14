@@ -192,12 +192,12 @@ exports.listalocalordemproximidaqdelatlng = (req, res, next) => {
       }).then(local => {
           res.status(200).json({ 
             "description": "Locais por coordenadas Geograficas.",
-            "local": local,
+            "local": local
             
           });
         }).catch(err => {
           res.status(500).json({
-            "description": "Tente novamente mais tarde - Geograficas.",
+            "description": "Tente novamente mais tarde.",
             "error": err
         });
     })
