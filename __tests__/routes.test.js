@@ -85,4 +85,14 @@ describe('Post Endpoints', () => {
     expect(res.statusCode).toEqual(200);
   });
 
+  it('Ordenados por proximidade utilizando Lat/Lng.', async () => {
+    const res = await request(app)
+      .post('/api/local/listar-todas-proximidade-lat-lng')
+      .send({
+         latitude : "-8,415618156",
+      	 longetude : "-37,05805266"
+      });
+    expect(res.statusCode).toEqual(200);
+  });
+
 });

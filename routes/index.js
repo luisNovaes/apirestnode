@@ -22,4 +22,6 @@ router.get('/local/listar-avaliacoes-local/:id', localController.listaravaliacoe
 
 router.get('/local/listar-local-por-usuario/:userId', localController.listarlocalporuser);
 
+router.post('/local/listar-todas-proximidade-lat-lng', localController.listalocalordemproximidaqdelatlng);
+
 module.exports = router;
