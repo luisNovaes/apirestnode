@@ -9,12 +9,9 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
  
 exports.signup = (req, res) => {
-  // Save User to Database
-  console.log("Processing func -> SignUp");
   
   User.create({
     name: req.body.name,
-    username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
   }).then(user => {
@@ -26,19 +23,18 @@ exports.signup = (req, res) => {
       }
     }).then(roles => {
       user.setRoles(roles).then(() => {
-        res.send("User registered successfully!");
+        res.send("Usuário registrado com sucesso!");
             });
     }).catch(err => {
-      res.status(500).send("Error -> " + err);
+      res.status(500).send("Erro -> " + err);
     });
   }).catch(err => {
-    res.status(500).send("Fail! Error -> " + err);
+    res.status(500).send("Falhou! Erro -> " + err);
   })
 }
  
 exports.signin = (req, res) => {
-  console.log("Sign-In");
-  
+
   User.findOne({
     where: {
       email: req.body.email
@@ -56,11 +52,11 @@ exports.signin = (req, res) => {
     var token = jwt.sign({ id: user.id }, config.secret, {
       expiresIn: 3600 // expires in 24 hours
     });
-    console.log(user.id);
+    //console.log(user.id);
     res.status(200).send({ auth: true, accessToken: token });
     
   }).catch(err => {
-    res.status(500).send('Error -> ' + err);
+    res.status(500).send('Erro -> ' + err);
   });
 }
  

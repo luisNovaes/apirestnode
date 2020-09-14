@@ -27,9 +27,6 @@ exports.cadastrarlocal = (req, res) => {
 
 exports.avaliarlocal = (req, res) => {
   
-  console.log("Processing func -> cadastrar local");
-  console.log(req.userId);
-  
   Avaliacao.create({
     userId: req.userId,
     localId: req.params.localId,
