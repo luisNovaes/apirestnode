@@ -12,6 +12,10 @@ var express = require('express');
   app.get('/api/local/listar-todos-locais', [authJwt.verifyToken, authJwt.isPmOrAdmin],localController.listartodoslocais);
   app.get('/api/local/listar-todas-avaliacoes', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listartodasavaliacoes);
 
+  
+  app.post('/api/local/listar-todas-proximidade-lat-lng', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listalocalordemproximidaqdelatlng);
+
+
   app.get('/api/local/listar-local-especifico/:id', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listarlocal);
   app.get('/api/local/listar-avaliacoes-local/:id', [authJwt.verifyToken, authJwt.isPmOrAdmin], localController.listaravaliacoeslocal);
 

@@ -50,11 +50,11 @@ exports.avaliarlocal = (req, res) => {
   });
 }
 
-
 exports.listartodoslocais = (req, res, next) => {
   console.log(req.userId);
       Local.findAll({  
         order: [
+          ['city', 'ASC'],
           ['nomelocal', 'ASC'],
         ]
     }).then(local => {
@@ -92,7 +92,6 @@ exports.listartodasavaliacoes = (req, res) =>{
     })
 
 }
-
 
 exports.listarlocal= (req, res) =>{
   console.log(req.userId);
@@ -137,7 +136,6 @@ exports.listaravaliacoeslocal = (req, res) =>{
   
 }
 
-
 exports.listarlocalporuser = (req, res, next) => {
     console.log(req.userId);
       Local.findAll({
@@ -162,8 +160,47 @@ exports.listarlocalporuser = (req, res, next) => {
 }
 
 
-exports.criaravaliacaolocais = (req, res, next) => {
+exports.listalocalordemproximidaqdelatlng = (req, res, next) => {
 
-
+          Local.findAll({
+            where: {
+              lat: {
+                [Op.or]: {
+                  [Op.gte]: req.body.latitude, 
+                  [Op.eq]: null
+                }
+              },
+              lon: {
+                [Op.or]: {
+                  [Op.gte]: req.body.longetude, 
+                  [Op.eq]: null
+                }
+              },
+              lat: {
+                [Op.or]: {
+                  [Op.lte]: req.body.latitude, 
+                  [Op.eq]: null
+                }
+              },
+              lon: {
+                [Op.or]: {
+                  [Op.lte]: req.body.longetude, 
+                  [Op.eq]: null
+                }
+              }            
+          },  
+      }).then(local => {
+          res.status(200).json({ 
+            "description": "Locais por coordenadas Geograficas.",
+            "local": local,
+            
+          });
+        }).catch(err => {
+          res.status(500).json({
+            "description": "Tente novamente mais tarde - Geograficas.",
+            "error": err
+        });
+    })
 }
+
 

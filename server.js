@@ -12,10 +12,10 @@ const Role = db.role;
 const ValorAvaliacao = db.valorAvaliacao;
   
 // force: true will drop the table if it already exists
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({force: false}).then(() => {
   console.log('Drop and Resync with { force: true }');
-  initial();
-  avaliacao();
+  //initial();
+  //avaliacao();
 });
  
 //require('./app/route/project.route.js')(app);

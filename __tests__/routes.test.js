@@ -40,12 +40,12 @@ describe('Post Endpoints', () => {
     expect(res.statusCode).toEqual(200);
   });
 
-  it('Avaliar local', async () => {
+  it('Teste de retono de erro 404', async () => {
     const res = await request(app)
       .post('/api/local/avaliar-local/1')
       .send({
         userId: '1',
-        comentario: 'Bahia',
+        comentario: 'Recife',
         avaliacao: '1',
       });
     expect(res.statusCode).toEqual(404);
