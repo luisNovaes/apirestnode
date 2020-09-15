@@ -50,9 +50,9 @@ exports.signin = (req, res) => {
     }
     
     var token = jwt.sign({ id: user.id }, config.secret, {
-      expiresIn: 3600 // expires in 24 hours
+      expiresIn: 3600 // expira em 1 hour
     });
-    //console.log(user.id);
+   
     res.status(200).send({ auth: true, accessToken: token });
     
   }).catch(err => {

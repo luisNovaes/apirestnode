@@ -11,16 +11,14 @@ const db = require('./config/db.config.js');
 const Role = db.role;
 const ValorAvaliacao = db.valorAvaliacao;
   
-// force: true will drop the table if it already exists
-db.sequelize.sync({force: false}).then(() => {
+// force: true irá remover a tabela se ela já existir
+db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync with { force: true }');
-  //initial();
-  //avaliacao();
+  initial();
+  avaliacao();
 });
  
-//require('./app/route/project.route.js')(app);
  
-// Create a Server
 var server = app.listen(8080, function () {
  
   var host = server.address().address
@@ -29,7 +27,7 @@ var server = app.listen(8080, function () {
   console.log("App listening at http://%s:%s", host, port)
 })
  
- 
+ //Cria os roles necessários para o cadastro do usuàrio
 function initial(){
   Role.create({
     id: 1,
@@ -47,6 +45,7 @@ function initial(){
   });
 }
 
+//Criaq os valores da avaliação necessários para avaliar o local.
 function avaliacao(){
   ValorAvaliacao.create({
     id: 1,
