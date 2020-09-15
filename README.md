@@ -6,13 +6,13 @@ Documentação do projeto
 O projeto foi desenvolvido com a seguinte arquitetura:
 
 Tecnologias do lado do Back end:
-Node js - version 12.18.3
-npm - version 6.14.6
-PostgreSQL - version 9.5
-PgAdmin4 - version 4.24
+Node js - version 12.18.3,
+npm - version 6.14.6,
+PostgreSQL - version 9.5,
+PgAdmin4 - version 4.24.
 
 Tools:
-Visual Studio code 
+Visual Studio code ,
 Postman.
 
 Link do Repositório: https://github.com/luisNovaes/apirestnode.git
