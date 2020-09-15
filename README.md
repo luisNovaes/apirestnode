@@ -29,12 +29,20 @@ Para rodar o projetos, você precisará:
 
 5 - conexão com o banco de dados:
 Crie uma base de dados no postgreSQL com os seguintes dados de conexão:
+
  database: 'base',
+ 
  username: 'postgres',
+ 
  password: 'root',
+ 
  host: 'localhost',
+ 
  dialect: 'postgres',
-Arquivo: config/env.js
+ 
+Estes dadso estão no arquivo: config/env.js.
+
+
 Ao rodar o projeto com npm instal, será disparado um script (/server.js) que criará todas as tabelas, assim como deve inserir os roles e os valores de avaliação em suas respectivas tabelas.
 
 
