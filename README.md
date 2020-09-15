@@ -95,7 +95,7 @@ GET - Listar avaliações por usuário especificado.
 http://localhost:8080/api/local/listar-local-especifico/1
 
 GET - Lista todas as avaliações de um local 
-hhttp://localhost:8080/api/local/listar-avaliacoes-local/1
+http://localhost:8080/api/local/listar-avaliacoes-local/1
 
 
 GET - Listar locais por usuário
