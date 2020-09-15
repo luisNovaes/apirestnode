@@ -108,7 +108,9 @@ Rode o teste com: npm test.
 
 
 Luis Magno Novaes
+
 Analista de Sistema Sênior 
+
 Data Scientist
 
 luismagnovaes@gmail.com
