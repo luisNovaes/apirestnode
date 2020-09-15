@@ -40,7 +40,7 @@ Crie uma base de dados no postgreSQL com os seguintes dados de conexão:
  
  dialect: 'postgres',
  
-Estes dadso estão no arquivo: config/env.js.
+Estes dados estão no arquivo: config/env.js.
 
 
 Ao rodar o projeto com npm instal, será disparado um script (/server.js) que criará todas as tabelas, assim como deve inserir os roles e os valores de avaliação em suas respectivas tabelas.
