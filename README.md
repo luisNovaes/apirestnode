@@ -27,7 +27,7 @@ Para rodar o projetos, você precisará:
 
 4 - Rode um “npm install”, para que as dependências sejam baixadas e criadas em  seus respectivos módulos e depois um “ng start“ para subir o projeto na porta padrão http://localhost:8080/ .
 
-5 - conexão com o banco de dados:
+5 - Conexão com o banco de dados:
 Crie uma base de dados no postgreSQL com os seguintes dados de conexão:
 
  database: 'base',
